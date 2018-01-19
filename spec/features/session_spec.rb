@@ -1,4 +1,5 @@
 require 'rails_helper'
+Devise::Test::ControllerHelpers
 
 RSpec.feature 'Session' do
   scenario 'user can log in and log out' do
@@ -16,14 +17,13 @@ RSpec.feature 'Session' do
 
     click_on 'Log out'
 
-
     expect(user_signed_in?).to eq false
     expect(page).to have_content 'Log in'
   end
 
   scenario 'logged user visits root path' do
     user = create(:user)
-    sign_in(user)
+    sign_in user
 
     visit root_path
 

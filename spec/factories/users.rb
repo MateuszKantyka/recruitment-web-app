@@ -3,6 +3,6 @@ FactoryBot.define do
     email "example@mail.com"
     password "12345678"
     is_male true
-    age 23
+    birthday '1994-08-21'
   end
 end
