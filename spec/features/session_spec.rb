@@ -14,11 +14,13 @@ RSpec.feature 'Session' do
     expect(current_path).to eq root_path
     expect(page).to have_content 'Log out'
     expect(page).to have_content 'example@mail.com'
+    expect(page).to have_content 'Signed in successfully.'
 
     click_on 'Log out'
 
     #expect(user_signed_in?).to eq false
     expect(page).to have_content 'Log in'
+    expect(page).to have_content 'Signed out successfully.'
   end
 
   scenario 'logged user visits root path' do
