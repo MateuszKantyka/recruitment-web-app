@@ -8,7 +8,8 @@ end
 gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
+gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 gem 'rubocop', require: false
