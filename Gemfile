@@ -14,6 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 gem 'rubocop', require: false
 gem 'coffee-rails', '~> 4.2'
+gem 'ransack'
 gem 'turbolinks', '~> 5'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'jbuilder', '~> 2.5'
