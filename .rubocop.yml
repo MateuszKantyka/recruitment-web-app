@@ -1,3 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/**/**'
+    - 'config/**/**'
+    - 'bin/**/**'
+    
 Style/Documentation:
   Enabled: false
 
