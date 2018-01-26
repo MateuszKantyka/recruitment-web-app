@@ -3,7 +3,7 @@ This is a spec for a candidate evaluation app.
 
 
 ## App requirements
-1. After navigating to the root directory using a web browser, the app should display a login page. If the user is logged in, then user listing is being displayed. 
+1. After navigating to the root directory using a web browser, the app should display a login page. If the user is logged in, then user listing is being displayed.
   Hint: it is usually a good idea to use a gem / working component to solve "standard" problems for a web app. In this context: https://github.com/plataformatec/devise
 
 2. Userbase consists of two types of users: regular and admin.
@@ -29,9 +29,9 @@ This is a spec for a candidate evaluation app.
 1. Download the repo and upload it as your own. Do not fork it.
 2. Add your evaluator as a contributor to your repository clone, so he or she can review pull requests.
 3. Implement each requirement in a separate commit. The app should work according to the spec describe in each stage. So if somebody does `git reset --hard <stage>`, he will encounter no problems with the given app version.
-4. Each stage of the app development should be presented as a pull request. You can skip this requirement, work alone and present only a final solution. However there are bonus points for showing us that you can work using PR workflow. 
+4. Each stage of the app development should be presented as a pull request. You can skip this requirement, work alone and present only a final solution. However there are bonus points for showing us that you can work using PR workflow.
 5. We love when a project has a test suite. Here is a hint: http://www.relishapp.com/rspec/rspec-rails/docs/gettingstarted
-6. The initial commit with a fresh rails application should be a separate one. In other words, do not commit the rails app code with the first requirement code. 
+6. The initial commit with a fresh rails application should be a separate one. In other words, do not commit the rails app code with the first requirement code.
 7. Do not use gems providing CRUD managing capabilities like rails_admin.
 
 # Good luck!

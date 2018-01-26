@@ -1,0 +1,21 @@
+<div class="col-md-8 col-md-offset-2">
+  <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+
+  <table class="table table-striped" id="customers">
+    <td><%= sort_link(@q, :id) %></td>
+    <td><%= sort_link(@q, :email) %></td>
+    <td><%= sort_link(@q, :is_male, 'Gender') %></td>
+    <td><%= sort_link(@q, :birthday) %></td>
+    <td></td>
+    <td></td>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.is_male ? 'male' : 'female' %></td>
+        <td><%= user.birthday %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
