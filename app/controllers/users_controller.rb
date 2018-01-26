@@ -6,6 +6,17 @@ class UsersController < ApplicationController
     @users = @q.result(distinct: true)
   end
 
+  def destroy
+    user = User.find(params[:id])
+    if user == current_user
+      flash[:danger] = "Admin can't remove himself"
+    else
+      user.destroy
+      flash[:success] = "User successfully destroyed"
+    end
+    redirect_to users_path
+  end
+
   private
 
   def require_login
