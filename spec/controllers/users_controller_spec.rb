@@ -35,8 +35,8 @@ RSpec.describe UsersController do
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(users_path)
-        expect(flash[:success]).to eq 'User successfully destroyed'
         expect(User.count).to eq 1
+        expect(flash[:success]).to eq 'User successfully destroyed'
       end
     end
 
@@ -49,8 +49,8 @@ RSpec.describe UsersController do
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(users_path)
-        expect(flash[:danger]).to eq "Admin can't remove himself"
         expect(User.first).to eq admin
+        expect(flash[:danger]).to eq "Admin can't remove himself"
       end
     end
   end
