@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123191056) do
+ActiveRecord::Schema.define(version: 20180125215611) do
 
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.string "type"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_interests_on_user_id"
   end
 
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20180123191056) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.date "birthday"
-    t.boolean "is_male"
+    t.boolean "is_male", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin"
+    t.boolean "admin", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
