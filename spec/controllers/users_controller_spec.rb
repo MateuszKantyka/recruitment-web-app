@@ -25,15 +25,33 @@ RSpec.describe UsersController do
   end
 
   describe '#destroy' do
-    it 'deletes user from database and refresh index page' do
-      user = create(:user)
+    context 'when admin gry wants to remove another user' do
+      it 'deletes user from database and refresh index page' do
+        user = create(:user)
+        admin = create(:user, admin: true)
+        sign_in admin
 
-      delete(:destroy, params: { id: user.id })
+        delete(:destroy, params: { id: user.id })
 
-      expect(response).to have_http_status(:found)
-      expect(response).to redirect_to(users_path)
-      expect(flash[:success]).to eq 'User successfully destroyed'
-      expect(User.first).to eq nil
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(users_path)
+        expect(flash[:success]).to eq 'User successfully destroyed'
+        expect(User.count).to eq 1
+      end
+    end
+
+    context 'when admin wants to remove himself' do
+      it 'display error message and refresh index page' do
+        admin = create(:user, admin: true)
+        sign_in admin
+
+        delete(:destroy, params: { id: admin.id })
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(users_path)
+        expect(flash[:danger]).to eq "Admin can't remove himself"
+        expect(User.first).to eq admin
+      end
     end
   end
 end
