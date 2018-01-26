@@ -23,4 +23,17 @@ RSpec.describe UsersController do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'deletes user from database and refresh index page' do
+      user = create(:user)
+
+      delete(:destroy, params: { id: user.id })
+
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(users_path)
+      expect(flash[:success]).to eq 'User successfully destroyed'
+      expect(User.first).to eq nil
+    end
+  end
 end
