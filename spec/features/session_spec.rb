@@ -9,7 +9,6 @@ RSpec.feature 'Session' do
     fill_in :user_password, with: '12345678'
     click_on 'Log in'
 
-    # expect(current_user).to eq user
     expect(current_path).to eq root_path
     expect(page).to have_content 'Log out'
     expect(page).to have_content 'example@mail.com'
@@ -17,13 +16,12 @@ RSpec.feature 'Session' do
 
     click_on 'Log out'
 
-    # expect(user_signed_in?).to eq false
     expect(page).to have_content 'Log in'
     expect(page).to have_content 'Signed out successfully.'
   end
 
   scenario 'logged user visits root path' do
-    user = create(:user)
+    user = create(:user, email: 'example@mail.com')
     sign_in user
 
     visit root_path
