@@ -7,7 +7,7 @@ RSpec.feature 'Admin' do
     sign_in admin
 
     visit root_path
-    click_on 'delete icon'
+    find(:xpath, "//a[@href='/users/2']").click
 
     expect(current_path).to eq users_path
     expect(page).to have_content 'User successfully destroyed'
