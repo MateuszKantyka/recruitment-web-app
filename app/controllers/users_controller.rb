@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:danger] = "Admin can't remove himself"
     else
       user.destroy
-      flash[:success] = "User successfully destroyed"
+      flash[:success] = 'User successfully destroyed'
     end
     redirect_to users_path
   end

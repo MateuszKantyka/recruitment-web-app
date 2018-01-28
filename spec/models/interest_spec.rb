@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Interest do
   it 'has none to begin with' do
@@ -7,7 +7,7 @@ RSpec.describe Interest do
 
   it 'can by created with valid arguments' do
     user = create(:user)
-    interest = Interest.new(name: 'jokes', type: 'Hobby', user_id: user.id).save
+    Interest.new(name: 'jokes', type: 'Hobby', user_id: user.id).save
 
     expect(Interest.count).to eq 1
   end
