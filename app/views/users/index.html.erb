@@ -16,7 +16,7 @@
         <td><%= user.is_male ? 'male' : 'female' %></td>
         <td><%= user.birthday %></td>
         <td><%= user.interests.map { |interest| interest.name }.join(', ')  %></td>
-        <td><%= link_to image_tag('trash.png'), user, method: :delete %></td>
+        <td><%= link_to image_tag('trash.png'), user, method: :delete if current_user.admin %></td>
       </tr>
     <% end %>
   </table>
