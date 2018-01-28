@@ -6,7 +6,7 @@
     <td><%= sort_link(@q, :email) %></td>
     <td><%= sort_link(@q, :is_male, 'Gender') %></td>
     <td><%= sort_link(@q, :birthday) %></td>
-    <td></td>
+    <td><%= sort_link(@q, :interests) %></td>
     <td></td>
 
     <% @users.each do |user| %>
@@ -15,8 +15,8 @@
         <td><%= user.email %></td>
         <td><%= user.is_male ? 'male' : 'female' %></td>
         <td><%= user.birthday %></td>
-        <td><%= user.birthday %></td>
-        <td><%= link_to image_tag("trash.png", border: 0), user, method: :delete %></td>
+        <td><%= user.interests.map { |interest| interest.name }.join(', ')  %></td>
+        <td><%= link_to image_tag('trash.png'), user, method: :delete %></td>
       </tr>
     <% end %>
   </table>
