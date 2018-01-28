@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize User
     user = User.find(params[:id])
     if user == current_user
       flash[:danger] = "Admin can't remove himself"
