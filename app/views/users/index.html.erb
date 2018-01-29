@@ -5,7 +5,7 @@
     <td><%= sort_link(@q, :id) %></td>
     <td><%= sort_link(@q, :email) %></td>
     <td><%= sort_link(@q, :is_male, 'Gender') %></td>
-    <td><%= sort_link(@q, :birthday) %></td>
+    <td><%= sort_link(@q, :birthday, 'Age') %></td>
     <td><%= 'interests' %></td>
     <td></td>
 
@@ -14,7 +14,7 @@
         <td><%= user.id %></td>
         <td><%= user.email %></td>
         <td><%= user.is_male ? 'male' : 'female' %></td>
-        <td><%= user.birthday %></td>
+        <td><%= user_age(user) %></td>
         <td><%= user.interests.pluck(:name).join(', ')  %></td>
         <td><%= link_to image_tag('trash.png'), user, id: "trash_icon_#{user.id}", method: :delete if current_user.admin %></td>
       </tr>
