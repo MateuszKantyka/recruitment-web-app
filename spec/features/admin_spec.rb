@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.feature 'Admin' do
   scenario 'admin can delete user' do
     admin = create(:user, admin: true)
-    create(:user, email: 'example-user@mail.com')
+    user = create(:user, email: 'example-user@mail.com')
     sign_in admin
 
     visit root_path
-    find(:xpath, "//a[@href='/users/2']").click
+    find(:id, "trash_icon_#{user.id}").click
 
     expect(current_path).to eq users_path
     expect(page).to have_content 'User successfully destroyed'
@@ -22,7 +22,7 @@ RSpec.feature 'Admin' do
     sign_in admin
 
     visit root_path
-    find(:xpath, "//a[@href='/users/2']").click
+    find(:id, "trash_icon_#{user.id}").click
 
     expect(current_path).to eq users_path
     expect(page).to have_content 'User successfully destroyed'
