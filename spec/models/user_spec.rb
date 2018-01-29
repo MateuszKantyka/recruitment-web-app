@@ -1,25 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  it 'has none to begin with' do
-    expect(User.count).to eq 0
-  end
-
-  it 'has a valid Factory' do
-    create(:user)
-
-    expect(User.count).to eq 1
-  end
-
-  it 'can by created with valid arguments' do
-    User.new(email: 'example@mail.com',
-             password: 'qwerty',
-             is_male: true,
-             admin: false).save
-
-    expect(User.count).to eq 1
-  end
-
   it 'can have more then one interest' do
     user = create(:user)
     Interest.new(name: 'flying', type: 'Work', user_id: user.id).save
