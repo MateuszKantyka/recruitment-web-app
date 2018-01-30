@@ -28,4 +28,15 @@ RSpec.feature 'Admin' do
     expect(page).to have_content 'User successfully destroyed'
     expect(page).not_to have_content 'example-user@mail.com'
   end
+
+  scenario 'admin can visit administration panel' do
+    admin = create(:user, admin: true)
+    sign_in admin
+
+    visit root_path
+    click_on 'navigate to the admin panel'
+
+    expect(current_path).to eq admin_panel_path
+    expect(page).to have_content 'Administration panel'
+  end
 end
