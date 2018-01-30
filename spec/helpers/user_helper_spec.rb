@@ -1,20 +1,25 @@
 require 'rails_helper'
+include ActiveSupport::Testing::TimeHelpers
 
 RSpec.describe UsersHelper do
   describe '#user_age' do
-    context "when user was born in 1994-08-21" do
+    context "when today's date is 2018-01-30 and user was born in 1994-08-21" do
       it 'return 23' do
-        result = user_age(create(:user, birthday: '1994-08-21'))
+        travel_to Date.new(2018, 1, 30) do
+          user = create(:user, birthday: '1994-08-21')
 
-        expect(result).to eq 23
+          expect(user_age(user)).to eq 23
+        end
       end
     end
 
-    context "when user was born in 1994-01-11" do
+    context "when today's date is 2018-01-30 and user was born in 1994-08-21" do
       it 'return 24' do
-        result = user_age(create(:user, birthday: '1994-01-11'))
+        travel_to Date.new(2018, 9, 11) do
+          user = create(:user, birthday: '1994-08-21')
 
-        expect(result).to eq 24
+          expect(user_age(user)).to eq 24
+        end
       end
     end
   end
