@@ -3,8 +3,8 @@ include ActiveSupport::Testing::TimeHelpers
 
 RSpec.describe UsersHelper do
   describe '#user_age' do
-    context "when today's date is 2018-01-30 and user was born in 1994-08-21" do
-      it 'return 23' do
+    context "when user did not have a birthday this year" do
+      it 'it returns the current age in years of a given user' do
         travel_to Date.new(2018, 1, 30) do
           user = create(:user, birthday: '1994-08-21')
 
@@ -13,8 +13,8 @@ RSpec.describe UsersHelper do
       end
     end
 
-    context "when today's date is 2018-01-30 and user was born in 1994-08-21" do
-      it 'return 24' do
+    context "when user did have a birthday this year" do
+      it 'it returns the current age in years of a given user' do
         travel_to Date.new(2018, 9, 11) do
           user = create(:user, birthday: '1994-08-21')
 
