@@ -3,7 +3,7 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def admin_panel?
+  def index?
     user.admin?
   end
 end
