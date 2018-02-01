@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:index, :destroy]
-  get '/admin_panel', to: 'users#admin_panel'
+  resources :admins, only: :index
   root 'users#index'
 end
