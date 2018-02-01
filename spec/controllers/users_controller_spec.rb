@@ -38,22 +38,22 @@ RSpec.describe UsersController do
         expect(User.count).to eq 1
         expect(flash[:success]).to eq 'User successfully destroyed'
       end
+    end
 
-      context 'when user have two interests' do
-        it 'deletes user from database and refresh index page' do
-          user = create(:user)
-          create(:interest, user_id: user.id)
-          create(:interest, user_id: user.id)
-          admin = create(:user, admin: true)
-          sign_in admin
+    context 'when user have two interests' do
+      it 'deletes user from database and refresh index page' do
+        user = create(:user)
+        create(:interest, user_id: user.id)
+        create(:interest, user_id: user.id)
+        admin = create(:user, admin: true)
+        sign_in admin
 
-          delete(:destroy, params: { id: user.id })
+        delete(:destroy, params: { id: user.id })
 
-          expect(response).to have_http_status(:found)
-          expect(response).to redirect_to(users_path)
-          expect(User.count).to eq 1
-          expect(flash[:success]).to eq 'User successfully destroyed'
-        end
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(users_path)
+        expect(User.count).to eq 1
+        expect(flash[:success]).to eq 'User successfully destroyed'
       end
     end
 
