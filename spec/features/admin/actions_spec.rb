@@ -36,7 +36,7 @@ RSpec.feature 'Admin' do
     visit root_path
     click_on 'navigate to the admin panel'
 
-    expect(current_path).to eq admin_panel_path
+    expect(current_path).to eq admins_path
     expect(page).to have_content 'Administration panel'
   end
 end
