@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def admin_panel
-    authorize User
-  end
-
   private
 
   def require_login
