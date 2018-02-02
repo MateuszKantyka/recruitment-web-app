@@ -16,6 +16,6 @@ end
 
 7.times do
   Interest.create!(name: Faker::ProgrammingLanguage.name,
-                   type: 'Work',
+                   type: 'work',
                    user_id: User.all.shuffle.first.id)
 end
