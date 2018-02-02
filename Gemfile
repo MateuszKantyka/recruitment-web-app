@@ -17,6 +17,7 @@ gem 'ransack'
 gem 'rubocop', require: false
 gem 'sass-rails'
 gem 'sqlite3'
+gem 'to_csv-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
