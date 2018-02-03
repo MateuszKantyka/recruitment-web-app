@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
-      all.each { |user| csv << attributes.map { |attr| user.send(attr) } }
+      all.each { |user| csv << attributes.map { |attr| user.public_send(attr) } }
     end
   end
 
