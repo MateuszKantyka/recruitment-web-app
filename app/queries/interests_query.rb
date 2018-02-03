@@ -11,7 +11,7 @@ class InterestsQuery
 
   def search_women_age_20_30
     User.where(is_male: false)
-        .where(birthday: Date.current - 30.year..Date.current - 20.year)
+        .where(birthday: (Date.current - 30.year)..(Date.current - 20.year))
   end
 
   def search_interest
