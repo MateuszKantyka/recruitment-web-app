@@ -39,12 +39,11 @@ RSpec.feature 'Admin' do
     sign_in admin
 
     visit admins_path
-    page.check('existing_user')
-    select('example@mail.com', from: 'users_list')
-    select('Ruby', from: 'interests_list')
+    click_on user.email
+    select('Ruby', from: 'interests_type_list')
     click_on 'Delete interest'
     fill_in :interest_name, with: 'Rails'
-    select('Work', from: 'interests_type')
+    select('Work', from: 'interests_type_type')
     click_on 'Add interest'
 
     expect(current_path).to eq admins_path
