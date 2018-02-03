@@ -11,6 +11,14 @@ RSpec.describe User do
     expect(user.interests.count).to eq 2
   end
 
+  describe '#to_csv' do
+    it 'returns user interests list' do
+      create(:user, email: 'example@mail.com', is_male: true)
+
+      expect(User.to_csv).to eq "id,email,gender,age,interests_list\n1,example@mail.com,male,23,\"\"\n"
+    end
+  end
+
   describe '#age' do
     context 'when user did not have a birthday this year' do
       it 'it returns the current age in years of a given user' do
