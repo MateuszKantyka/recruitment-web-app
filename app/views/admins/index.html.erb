@@ -1,3 +1,8 @@
 <div class="col-md-8 col-md-offset-2">
   <h1>Administration panel</h1>
+  <%= link_to 'New User', new_user_path %>
+  <br><br><p>Click on user to edit:</p>
+  <% @users.each do |user| %>
+    <%= link_to "#{user.email}", edit_user_path(user) %> <br>
+  <% end %>
 </div>
