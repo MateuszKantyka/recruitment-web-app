@@ -10,4 +10,22 @@ RSpec.describe User do
 
     expect(user.interests.count).to eq 2
   end
+
+  describe '#gender' do
+    context 'when user is_male field equal false' do
+      it "returns 'female'" do
+        user = create(:user, is_male: false)
+
+        expect(user.gender).to eq 'female'
+      end
+    end
+
+    context 'when user is_male field equal true' do
+      it "returns 'male'" do
+        user = create(:user, is_male: true)
+
+        expect(user.gender).to eq 'male'
+      end
+    end
+  end
 end
