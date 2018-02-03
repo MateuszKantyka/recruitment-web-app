@@ -59,10 +59,11 @@ RSpec.describe UsersController do
         params = { id: user.id, user: { email: 'user-mail@mail.com' } }
 
         patch(:update, params: params)
+        user.reload
 
         expect(user.email).to eq 'user-mail@mail.com'
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(users_path)
+        expect(response).to redirect_to(admins_path)
         expect(flash[:success]).to eq 'User updated'
       end
     end
