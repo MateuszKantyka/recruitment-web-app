@@ -11,6 +11,16 @@ RSpec.describe User do
     expect(user.interests.count).to eq 2
   end
 
+  describe '#interests_list' do
+    it 'returns user interests list' do
+      user = create(:user)
+      create(:interest, user: user, name: 'Rails')
+      create(:interest, user: user, name: 'Ruby')
+
+      expect(user.interests_list).to eq 'Rails, Ruby'
+    end
+  end
+
   describe '#gender' do
     context 'when user is_male field equal false' do
       it "returns 'female'" do
