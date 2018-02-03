@@ -5,25 +5,23 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   def self.to_csv
-   attributes = %w{id email gender age interests_list}
+    attributes = %w[id email gender age interests_list]
 
-   CSV.generate(headers: true) do |csv|
-     csv << attributes
-     all.each do |user|
-       csv << attributes.map{ |attr| user.send(attr) }
-     end
-   end
- end
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each { |user| csv << attributes.map { |attr| user.send(attr) } }
+    end
+  end
 
- def gender
-   is_male ? 'male' : 'female'
- end
+  def gender
+    is_male ? 'male' : 'female'
+  end
 
- def age
-   user_age(self)
- end
+  def age
+    user_age(self)
+  end
 
- def interests_list
-   self.interests.pluck(:name).join(', ')
- end
+  def interests_list
+    interests.pluck(:name).join(', ')
+  end
 end
