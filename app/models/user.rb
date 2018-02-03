@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  include UsersHelper
   devise :database_authenticatable
   has_many :interests, dependent: :delete_all
   validates :email, uniqueness: true
@@ -18,7 +17,14 @@ class User < ApplicationRecord
   end
 
   def age
-    user_age(self)
+    now = Date.current
+
+    age = now.year - birthday.year
+
+    age -= 1 if birthday.month > now.month
+    age -= 1 if now.month == birthday.month && now.day >= birthday.day
+
+    age
   end
 
   def interests_list
