@@ -22,6 +22,19 @@ RSpec.describe UsersController do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+
+    context 'when admin is logged and want to generate csv file' do
+      it 'generates csv file with user data' do
+        admin = create(:user, admin: true, email: 'example-admin-mail@mail.com')
+        create(:user, email: 'example-user-mail@mail.com')
+        sign_in admin
+
+        get :index, format: :csv
+
+        expect(response.body).to include('example-user-mail@mail.com')
+        expect(response.body).to include('example-admin-mail@mail.com')
+      end
+    end
   end
 
   describe '#destroy' do
