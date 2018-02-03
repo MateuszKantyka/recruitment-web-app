@@ -24,6 +24,34 @@ RSpec.describe UsersController do
     end
   end
 
+  describe '#create' do
+    context 'when params are valid' do
+      it 'create a new user' do
+        params = { customer: { email: 'example@mail.com',
+                               is_male: false,
+                               birthday: '1994-08-21' } }
+
+        post(:create, params: params)
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(admins_path)
+        expect(flash[:success]).to eq 'User created'
+      end
+    end
+
+    context 'when params are not valid' do
+      it 'refresh new user view' do
+        params =  { customer: { email: '' } }
+
+        post(:create, params: params)
+
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:new)
+        expect(flash[:danger]).to eq 'Correct the field'
+      end
+    end
+  end
+
   describe '#destroy' do
     context 'when admin wants to remove another user' do
       it 'deletes user from database and refresh index page' do
