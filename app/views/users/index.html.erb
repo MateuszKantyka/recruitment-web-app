@@ -3,7 +3,7 @@
   <% if current_user.admin %>
     <li><%= link_to 'navigate to the admin panel', admins_path if current_user.admin %></li>
   <% end %>
-  
+
   <table class="table table-striped" id="customers">
     <td><%= sort_link(@q, :id) %></td>
     <td><%= sort_link(@q, :email) %></td>

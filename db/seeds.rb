@@ -16,6 +16,21 @@ end
 
 7.times do
   Interest.create!(name: Faker::ProgrammingLanguage.name,
-                   type: 'Work',
+                   type: 'work',
                    user_id: User.all.shuffle.first.id)
 end
+
+
+User.create!(email: Faker::Internet.email,
+             password: Faker::Internet.password(8),
+             is_male: false,
+             admin: false,
+             birthday: Faker::Date.birthday(20, 30))
+
+Interest.create!(name: 'cosmetics',
+                type: 'health',
+                user_id: User.last.id)
+
+Interest.create!(name: 'cosmos',
+                type: 'health',
+                user_id: User.last.id)
