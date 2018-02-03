@@ -26,8 +26,8 @@ RSpec.describe UsersController do
 
   describe '#create' do
     context 'when params are valid' do
-      it 'create a new user' do
-        params = { customer: { email: 'example@mail.com',
+      it 'create new user and redirect to admin panel' do
+        params = { user: { email: 'example@mail.com',
                                is_male: false,
                                birthday: '1994-08-21' } }
 
@@ -41,12 +41,42 @@ RSpec.describe UsersController do
 
     context 'when params are not valid' do
       it 'refresh new user view' do
-        params =  { customer: { email: '' } }
+        params =  { user: { email: '' } }
 
         post(:create, params: params)
 
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
+        expect(flash[:danger]).to eq 'Correct the field'
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'when params are valid' do
+      it 'update user and redirect to admin panel' do
+        user = create(:user, email: 'example@mail.com')
+        params = { id: user.id, user: { email: 'user-mail@mail.com' } }
+
+        patch(:update, params: params)
+
+        expect(user.email).to eq 'user-mail@mail.com'
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(users_path)
+        expect(flash[:success]).to eq 'User updated'
+      end
+    end
+
+    context 'when params are not valid' do
+      it 'refresh edit user view' do
+        user = create(:user, email: 'example@mail.com')
+        params = { id: user.id, user: { email: '' } }
+
+        patch(:update, params: params)
+
+        expect(user.email).to eq 'example@mail.com'
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:edit)
         expect(flash[:danger]).to eq 'Correct the field'
       end
     end
