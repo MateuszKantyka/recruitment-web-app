@@ -11,6 +11,28 @@ RSpec.describe User do
     expect(user.interests.count).to eq 2
   end
 
+  describe '#age' do
+    context 'when user did not have a birthday this year' do
+      it 'it returns the current age in years of a given user' do
+        travel_to Date.new(2018, 1, 30) do
+          user = create(:user, birthday: '1994-08-21')
+
+          expect(user.age).to eq 23
+        end
+      end
+    end
+
+    context 'when user did have a birthday this year' do
+      it 'it returns the current age in years of a given user' do
+        travel_to Date.new(2018, 9, 11) do
+          user = create(:user, birthday: '1994-08-21')
+
+          expect(user.age).to eq 24
+        end
+      end
+    end
+  end
+
   describe '#interests_list' do
     it 'returns user interests list' do
       user = create(:user)
