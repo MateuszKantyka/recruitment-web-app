@@ -4,10 +4,11 @@ class UsersController < ApplicationController
   def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+    if current_user.admin
+      respond_to do |format|
+        format.html
+        format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+      end
     end
   end
 
