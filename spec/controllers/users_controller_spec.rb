@@ -27,6 +27,8 @@ RSpec.describe UsersController do
   describe '#create' do
     context 'when params are valid' do
       it 'create new user and redirect to admin panel' do
+        admin = create(:user, admin: true)
+        sign_in admin
         params = { user: { email: 'example@mail.com',
                                is_male: false,
                                birthday: '1994-08-21' } }
@@ -41,6 +43,8 @@ RSpec.describe UsersController do
 
     context 'when params are not valid' do
       it 'refresh new user view' do
+        admin = create(:user, admin: true)
+        sign_in admin
         create(:user, email: 'existing_user@mail.com')
         params =  { user: { email: 'existing_user@mail.com', is_male: true } }
 
@@ -56,6 +60,8 @@ RSpec.describe UsersController do
   describe '#update' do
     context 'when params are valid' do
       it 'update user and redirect to admin panel' do
+        admin = create(:user, admin: true)
+        sign_in admin
         user = create(:user, email: 'example@mail.com')
         params = { id: user.id, user: { email: 'user-mail@mail.com' } }
 
@@ -71,6 +77,8 @@ RSpec.describe UsersController do
 
     context 'when params are not valid' do
       it 'refresh edit user view' do
+        admin = create(:user, admin: true)
+        sign_in admin
         user = create(:user, email: 'example@mail.com')
         create(:user, email: 'existing_user@mail.com')
         params = { id: user.id, user: { email: 'existing_user@mail.com' } }

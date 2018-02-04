@@ -7,10 +7,12 @@ class UsersController < ApplicationController
   end
 
   def new
+    authorize User
     @user = User.new
   end
 
   def create
+    authorize User
     @user = User.new(user_params)
     @user.password = 'secret'
     @user.admin = false
@@ -24,10 +26,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    authorize User
     @user = User.find(params[:id])
   end
 
   def update
+    authorize User
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = 'User updated'
