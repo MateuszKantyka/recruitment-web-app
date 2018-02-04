@@ -30,8 +30,8 @@ RSpec.describe UsersController do
         admin = create(:user, admin: true)
         sign_in admin
         params = { user: { email: 'example@mail.com',
-                               is_male: false,
-                               birthday: '1994-08-21' } }
+                           is_male: false,
+                           birthday: '1994-08-21' } }
 
         post(:create, params: params)
 
@@ -46,7 +46,7 @@ RSpec.describe UsersController do
         admin = create(:user, admin: true)
         sign_in admin
         create(:user, email: 'existing_user@mail.com')
-        params =  { user: { email: 'existing_user@mail.com', is_male: true } }
+        params = { user: { email: 'existing_user@mail.com', is_male: true } }
 
         post(:create, params: params)
 
