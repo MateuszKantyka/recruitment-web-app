@@ -52,7 +52,7 @@ RSpec.describe User do
   end
 
   describe '#gender' do
-    context 'when user is_male field equal false' do
+    context 'when user is female' do
       it "returns 'female'" do
         user = create(:user, is_male: false)
 
@@ -60,7 +60,7 @@ RSpec.describe User do
       end
     end
 
-    context 'when user is_male field equal true' do
+    context 'when user is male' do
       it "returns 'male'" do
         user = create(:user, is_male: true)
 
