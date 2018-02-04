@@ -12,16 +12,18 @@ RSpec.describe User do
   end
 
   describe '#to_csv' do
-    it 'returns user interests list' do
-      create(:user, email: 'example@mail.com', is_male: true)
+    it 'returns all users data' do
+      user = create(:user, email: 'example@mail.com', is_male: true)
+      create(:interest, user: user, name: 'ruby')
+      create(:interest, user: user, name: 'rails')
 
-      expect(User.to_csv).to eq "id,email,gender,age,interests_list\n1,example@mail.com,male,23,\"\"\n"
+      expect(User.to_csv).to eq "id,email,gender,age,interests_list\n1,example@mail.com,male,23,\"ruby, rails""\"\n"
     end
   end
 
   describe '#age' do
     context 'when user did not have a birthday this year' do
-      it 'it returns the current age in years of a given user' do
+      it 'returns the current age in years of a given user' do
         travel_to Date.new(2018, 1, 30) do
           user = create(:user, birthday: '1994-08-21')
 
@@ -31,7 +33,7 @@ RSpec.describe User do
     end
 
     context 'when user did have a birthday this year' do
-      it 'it returns the current age in years of a given user' do
+      it 'returns the current age in years of a given user' do
         travel_to Date.new(2018, 9, 11) do
           user = create(:user, birthday: '1994-08-21')
 
