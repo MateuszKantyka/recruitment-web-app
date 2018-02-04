@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Admin' do
+RSpec.feature 'Generate CSV' do
   scenario 'admin can generate csv file' do
     admin = create(:user, admin: true)
     sign_in admin
