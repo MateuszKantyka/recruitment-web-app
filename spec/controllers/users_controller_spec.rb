@@ -41,7 +41,8 @@ RSpec.describe UsersController do
 
     context 'when params are not valid' do
       it 'refresh new user view' do
-        params =  { user: { email: '' } }
+        create(:user, email: 'existing_user@mail.com')
+        params =  { user: { email: 'existing_user@mail.com', is_male: true } }
 
         post(:create, params: params)
 
@@ -71,7 +72,8 @@ RSpec.describe UsersController do
     context 'when params are not valid' do
       it 'refresh edit user view' do
         user = create(:user, email: 'example@mail.com')
-        params = { id: user.id, user: { email: '' } }
+        create(:user, email: 'existing_user@mail.com')
+        params = { id: user.id, user: { email: 'existing_user@mail.com' } }
 
         patch(:update, params: params)
 
