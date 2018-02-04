@@ -8,12 +8,14 @@ RSpec.feature 'Admin' do
     visit admins_path
     click_on 'New User'
     fill_in :user_email, with: 'example@mail.com'
-    fill_in :user_gender, with: 'Male'
-    fill_in :user_birthday, with: '1994-08-21'
-    click_on 'Create User'
+    select('Male', from: 'user_is_male')
+    select('1994', from: 'user_birthday_1i')
+    select('February', from: 'user_birthday_2i')
+    select('28', from: 'user_birthday_3i')
+    click_on 'Save'
 
     expect(current_path).to eq admins_path
-    expect(page).to have_content user.email
+    expect(page).to have_content 'example@mail.com'
     expect(page).to have_content 'User created'
   end
 
@@ -25,10 +27,10 @@ RSpec.feature 'Admin' do
     visit admins_path
     click_on user.email
     fill_in :user_email, with: 'user-mail@mail.com'
-    click_on 'Update User'
+    click_on 'Save'
 
     expect(current_path).to eq admins_path
-    expect(page).to have_content user.email
+    expect(page).to have_content 'user-mail@mail.com'
     expect(page).to have_content 'User updated'
   end
 
@@ -40,12 +42,13 @@ RSpec.feature 'Admin' do
 
     visit admins_path
     click_on user.email
-    select('Ruby', from: 'interests_type_list')
-    click_on 'Delete interest'
-    fill_in :interest_name, with: 'Rails'
-    select('Work', from: 'interests_type_type')
-    click_on 'Add interest'
+    click_on 'remove interest'
+    click_on 'add interest'
+    fill_in :user_interests_attributes_0_name, with: 'Rails'
+    select('Work', from: 'user_interests_attributes_0_type')
+    click_on 'Save'
 
+    expect(user.interests.first.name).to eq 'Rails'
     expect(current_path).to eq admins_path
   end
 end

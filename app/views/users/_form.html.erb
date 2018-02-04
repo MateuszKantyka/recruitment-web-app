@@ -2,8 +2,8 @@
   <h1>User form</h1>
   <%= simple_form_for @user do |f| %>
     <%= f.input :email %>
-    <%= f.input :birthday %>
-    <%= f.input :is_male %>
+    <%= f.input :birthday, start_year: Date.today.year - 90 %>
+    <%= f.input :is_male, label: 'Gender', collection: [['Male', true], ['Female', false]] %>
 
     <h3>Interests</h3>
 
