@@ -3,7 +3,13 @@
   <% if current_user.admin %>
     <li><%= link_to 'navigate to the admin panel', admins_path if current_user.admin %></li>
   <% end %>
-  
+
+  <%= search_form_for @q do |f| %>
+    <%= f.label :email_cont %>
+    <%= f.search_field :email_cont %>
+    <%= f.submit %>
+  <% end %>
+
   <table class="table table-striped" id="customers">
     <td><%= sort_link(@q, :id) %></td>
     <td><%= sort_link(@q, :email) %></td>
