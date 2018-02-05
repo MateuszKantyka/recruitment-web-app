@@ -18,9 +18,15 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def send_mail
+    user = User.find(params[:id])
+    GreetingsMailer.send_regards(user, current_user).deliver_now
+  end
+
   private
 
   def require_login
     redirect_to new_user_session_path unless user_signed_in?
   end
+
 end
