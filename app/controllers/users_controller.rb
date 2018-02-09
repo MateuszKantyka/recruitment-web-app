@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       redirect_to admins_path
       flash[:success] = 'User created'
     else
-      flash.now[:danger] = 'Correct the field'
+      flash.now[:danger] = 'There were some errors when saving the user'
       render 'new'
     end
   end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       flash[:success] = 'User updated'
       redirect_to admins_path
     else
-      flash.now[:danger] = 'Correct the field'
+      flash.now[:danger] = 'There were some errors when saving the user'
       render 'edit'
     end
   end
