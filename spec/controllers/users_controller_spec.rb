@@ -24,9 +24,78 @@ RSpec.describe UsersController do
     end
   end
 
+  describe '#create' do
+    context 'when params are valid' do
+      it 'creates new user and redirects to admin panel' do
+        admin = create(:user, admin: true)
+        sign_in admin
+        params = { user: { email: 'example@mail.com',
+                           is_male: false,
+                           birthday: '1994-08-21' } }
+
+        post(:create, params: params)
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(admins_path)
+        expect(flash[:success]).to eq 'User created'
+      end
+    end
+
+    context 'when params are not valid' do
+      it 'refreshes new user view' do
+        admin = create(:user, admin: true)
+        sign_in admin
+        create(:user, email: 'existing_user@mail.com')
+        params = { user: { email: 'existing_user@mail.com', is_male: true } }
+
+        post(:create, params: params)
+
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:new)
+        expect(flash[:danger]).to eq 'Correct the field'
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'when params are valid' do
+      it 'updates user and redirects to admin panel' do
+        admin = create(:user, admin: true)
+        sign_in admin
+        user = create(:user, email: 'example@mail.com')
+        params = { id: user.id, user: { email: 'user-mail@mail.com' } }
+
+        patch(:update, params: params)
+        user.reload
+
+        expect(user.email).to eq 'user-mail@mail.com'
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(admins_path)
+        expect(flash[:success]).to eq 'User updated'
+      end
+    end
+
+    context 'when params are not valid' do
+      it 'refreshes edit user view' do
+        admin = create(:user, admin: true)
+        sign_in admin
+        user = create(:user, email: 'example@mail.com')
+        create(:user, email: 'existing_user@mail.com')
+        params = { id: user.id, user: { email: 'existing_user@mail.com' } }
+
+        patch(:update, params: params)
+
+        expect(user.email).to eq 'example@mail.com'
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq 'Correct the field'
+      end
+    end
+  end
+
   describe '#destroy' do
     context 'when admin wants to remove another user' do
-      it 'deletes user from database and refresh index page' do
+      it 'deletes user from database and refreshes index page' do
         user = create(:user)
         admin = create(:user, admin: true)
         sign_in admin
@@ -41,7 +110,7 @@ RSpec.describe UsersController do
     end
 
     context 'when user have two interests' do
-      it 'deletes user from database and refresh index page' do
+      it 'deletes user from database and refreshes index page' do
         user = create(:user)
         create(:interest, user_id: user.id)
         create(:interest, user_id: user.id)
@@ -58,7 +127,7 @@ RSpec.describe UsersController do
     end
 
     context 'when admin wants to remove himself' do
-      it 'display error message and refresh index page' do
+      it 'displays error message and refreshes index page' do
         admin = create(:user, admin: true)
         sign_in admin
 

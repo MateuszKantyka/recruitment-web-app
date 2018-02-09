@@ -6,16 +6,20 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap-sass'
+gem 'cocoon'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'enum_help'
 gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 gem 'jbuilder', '~> 2.5'
+gem 'nested_form'
 gem 'puma', '~> 3.7'
 gem 'pundit'
 gem 'rails', '~> 5.1.4'
 gem 'ransack'
 gem 'rubocop', require: false
 gem 'sass-rails'
+gem 'simple_form'
 gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
