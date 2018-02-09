@@ -34,7 +34,7 @@ RSpec.feature 'Admin' do
     expect(page).to have_content 'User updated'
   end
 
-  scenario 'admin can deleting or adding interest to a user' do
+  scenario 'admin can delete and add interest to a user' do
     admin = create(:user, admin: true)
     user = create(:user, email: 'example@mail.com')
     create(:interest, name: 'Ruby', user_id: user.id)
