@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Search' do
-  scenario 'user can set scope the listing by inputing the email' do
+  scenario 'user can scope the listing by inputing the email' do
     user = create(:user, email: 'example@mail.com')
     create(:user, email: 'example_mail_2@mail.com')
     create(:user, email: 'example_mail_3@mail.com')
