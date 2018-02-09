@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :interest do
     name 'Ruby'
-    type 'Work'
+    type 'work'
     association :user
   end
 end

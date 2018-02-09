@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125215611) do
+ActiveRecord::Schema.define(version: 20180204131228) do
 
   create_table "interests", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.integer "type"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_interests_on_user_id"
   end
