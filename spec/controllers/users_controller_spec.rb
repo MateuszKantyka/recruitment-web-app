@@ -25,14 +25,19 @@ RSpec.describe UsersController do
 
     context 'when admin is logged and want to generate csv file' do
       it 'generates csv file with user data' do
-        admin = create(:user, admin: true, email: 'example-admin-mail@mail.com')
-        create(:user, email: 'example-user-mail@mail.com')
+        admin = create(:user, admin: true, email: 'example-admin-mail@mail.com', is_male: true, birthday: '1994-08-21')
+        user = create(:user, email: 'example-user-mail@mail.com')
+        create(:interest, user: admin, name: 'ruby')
         sign_in admin
 
         get :index, format: :csv
+        parsed_response = CSV.parse(response.body)
+        admin_in_response = parsed_response.find { |row| row[1] == 'example-admin-mail@mail.com' }
+        user_in_response = parsed_response.find { |row| row[1] == 'example-user-mail@mail.com' }
 
-        expect(response.body).to include('example-user-mail@mail.com')
-        expect(response.body).to include('example-admin-mail@mail.com')
+        expect(parsed_response[0]).to contain_exactly('id', 'email', 'gender', 'age', 'interests_list')
+        expect(admin_in_response).to contain_exactly(admin.id.to_s, 'example-admin-mail@mail.com', 'male', admin.age.to_s, "ruby")
+        expect(user_in_response).to contain_exactly(user.id.to_s, 'example-user-mail@mail.com', 'male', user.age.to_s, "")
       end
     end
   end
