@@ -7,6 +7,8 @@ RSpec.feature 'Admin' do
 
     visit admins_path
     click_on 'New User'
+    fill_in :user_first_name, with: 'Mateusz'
+    fill_in :user_last_name, with: 'Kantyka'
     fill_in :user_email, with: 'example@mail.com'
     select('Male', from: 'user_is_male')
     select('1994', from: 'user_birthday_1i')
@@ -17,6 +19,8 @@ RSpec.feature 'Admin' do
     expect(current_path).to eq admins_path
     expect(page).to have_content 'example@mail.com'
     expect(page).to have_content 'User created'
+    expect(page).to have_content 'Mateusz'
+    expect(page).to have_content 'Kantyka'
   end
 
   scenario 'admin can edit a user' do

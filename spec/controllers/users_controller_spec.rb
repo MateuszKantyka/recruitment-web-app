@@ -31,11 +31,33 @@ RSpec.describe UsersController do
         sign_in admin
         params = { user: { email: 'example@mail.com',
                            is_male: false,
+                           first_name: 'Mateusz',
+                           last_name: 'Kantyka',
+                           birthday: '1994-08-21' } }
+
+        expect { post(:create, params: params) }.to change { User.count }.by(1)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(admins_path)
+        expect(flash[:success]).to eq 'User created'
+      end
+
+      it 'saves user with provided params' do
+        admin = create(:user, admin: true)
+        sign_in admin
+        params = { user: { email: 'example@mail.com',
+                           is_male: false,
+                           first_name: 'Mateusz',
+                           last_name: 'Kantyka',
                            birthday: '1994-08-21' } }
 
         post(:create, params: params)
+        user = User.last
 
-        expect(response).to have_http_status(:found)
+        expect(user.email).to eq 'example@mail.com'
+        expect(user.is_male).to eq false
+        expect(user.first_name).to eq 'Mateusz'
+        expect(user.last_name).to eq 'Kantyka'
+        expect(user.birthday.to_s(:db)).to eq '1994-08-21'
         expect(response).to redirect_to(admins_path)
         expect(flash[:success]).to eq 'User created'
       end
@@ -52,7 +74,7 @@ RSpec.describe UsersController do
 
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
-        expect(flash[:danger]).to eq 'Correct the field'
+        expect(flash[:danger]).to eq 'There were some errors when saving the user'
       end
     end
   end
@@ -88,7 +110,7 @@ RSpec.describe UsersController do
         expect(user.email).to eq 'example@mail.com'
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:edit)
-        expect(flash[:danger]).to eq 'Correct the field'
+        expect(flash[:danger]).to eq 'There were some errors when saving the user'
       end
     end
   end
