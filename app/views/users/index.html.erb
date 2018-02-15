@@ -19,7 +19,7 @@
         <td><%= user.is_male ? 'male' : 'female' %></td>
         <td><%= user_age(user) %></td>
         <td><%= user.interests.pluck(:name).join(', ')  %></td>
-        <td><%= link_to image_tag('mail.png'), user, method: :change_order_status %></td>
+        <td><%= link_to image_tag('mail.png'), user, id: "mail_icon_#{user.id}", method: :post %></td>
         <% if current_user.admin %>
           <td><%= link_to image_tag('trash.png'), user, id: "trash_icon_#{user.id}", method: :delete %></td>
         <% end %>

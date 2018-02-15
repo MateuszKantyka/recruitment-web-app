@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   def send_mail
     user = User.find(params[:id])
     GreetingsMailer.send_regards(user, current_user).deliver_now
+    flash[:success] = "The mail is sent to the User: #{user.email}"
+    redirect_to users_path
   end
 
   private

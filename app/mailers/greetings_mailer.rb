@@ -1,4 +1,4 @@
-class GreetingsMailer < ActionMailer::Base
+class GreetingsMailer < ApplicationMailer
   def send_regards(user, current_user)
     @user = user
     @current_user = current_user
