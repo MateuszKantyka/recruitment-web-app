@@ -25,6 +25,12 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def send_greetings_to_users
+    GreetingsMailer.send_regards_to_users.deliver_now
+    flash[:success] = 'The mail is sent to the all users'
+    redirect_to users_path
+  end
+
   private
 
   def require_login
