@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20180215112950) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.integer "type"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_interests_on_user_id"
   end
 
@@ -37,4 +40,5 @@ ActiveRecord::Schema.define(version: 20180215112950) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "interests", "users"
 end
