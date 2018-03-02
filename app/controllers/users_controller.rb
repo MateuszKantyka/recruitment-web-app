@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   def update
     authorize User
     @user = User.find(params[:id])
+    avatar = params[:user][:avatar]
     if @user.update_attributes(user_params)
       flash[:success] = 'User updated'
       redirect_to admins_path
@@ -61,6 +62,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :is_male, :birthday, interests_attributes: %I[id name type _destroy])
+    params.require(:user).permit(:email, :first_name, :last_name, :is_male, :birthday, :avatar, interests_attributes: %I[id name type _destroy])
   end
 end
