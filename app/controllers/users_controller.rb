@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   def update
     authorize User
     @user = User.find(params[:id])
-    avatar = params[:user][:avatar]
     if @user.update_attributes(user_params)
       flash[:success] = 'User updated'
       redirect_to admins_path
