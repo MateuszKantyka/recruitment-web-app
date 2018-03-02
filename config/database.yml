@@ -6,14 +6,10 @@ default: &default
   password:
   host: localhost
 
-production:
-  <<: *default
-  database: recruitment_web_app
-
 development:
   <<: *default
   database: recruitment_web_app
 
 test:
   <<: *default
-  database: recruitment_web_app
+  database: test_recruitment_web_app
