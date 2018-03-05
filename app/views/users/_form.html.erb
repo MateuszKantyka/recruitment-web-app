@@ -1,0 +1,25 @@
+<div class="col-md-4 col-md-offset-2">
+  <h1>User form</h1>
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :birthday, start_year: Date.today.year - 90 %>
+    <%= f.input :is_male, label: 'Gender', collection: [['Male', true], ['Female', false]], include_blank: false %>
+    <%= f.file_field :avatar %>
+
+    <h3>Interests</h3>
+
+    <div id='interests'>
+      <%= f.simple_fields_for :interests do |interest| %>
+        <%= render 'users/interest_fields', :f => interest %>
+      <% end %>
+
+      <div class='links'>
+        <%= link_to_add_association 'add interest', f, :interests %>
+      </div>
+    </div>
+
+    <%= f.submit 'Save' %>
+  <% end %>
+</div>

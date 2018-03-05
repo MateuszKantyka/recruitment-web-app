@@ -3,6 +3,7 @@ class AdminsController < ApplicationController
   before_action :user_not_authorize, if: -> { !current_user.admin? }
 
   def index
+    @users = User.all
   end
 
   private
