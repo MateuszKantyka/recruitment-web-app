@@ -38,6 +38,24 @@ RSpec.feature 'Admin' do
     expect(page).to have_content 'User updated'
   end
 
+  scenario 'admin can add avatar to a user' do
+    admin = create(:user, admin: true)
+    user = create(:user, email: 'example@mail.com')
+    sign_in admin
+
+    visit admins_path
+    click_on user.email
+    attach_file('user[avatar]', Rails.root + 'spec/fixtures/test.png')
+    click_on 'Save'
+    user.reload
+    file = File.open('spec/fixtures/test.png', 'rb')
+
+    expect(user.avatar.download).to eq file.read
+    expect(current_path).to eq admins_path
+    expect(page).to have_content 'example@mail.com'
+    expect(page).to have_content 'User updated'
+  end
+
   scenario 'admin can delete and add interest to a user' do
     admin = create(:user, admin: true)
     user = create(:user, email: 'example@mail.com')
