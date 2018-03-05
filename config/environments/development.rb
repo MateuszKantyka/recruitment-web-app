@@ -45,6 +45,7 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Uploading files is stored on local drive
   config.active_storage.service = :local
 
   # Raises error for missing translations
