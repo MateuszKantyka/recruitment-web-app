@@ -180,4 +180,15 @@ RSpec.describe UsersController do
       end
     end
   end
+
+  describe '#send_greetings_to_users' do
+    it 'sends greetings to all users' do
+      user = create(:user)
+      sign_in user
+
+      post(:send_greetings_to_users)
+
+      expect(ActionMailer::Base.deliveries).not_to be_empty
+    end
+  end
 end
