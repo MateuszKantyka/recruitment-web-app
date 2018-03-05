@@ -10,12 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125215611) do
+ActiveRecord::Schema.define(version: 2018_03_02_095312) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "interests", force: :cascade do |t|
     t.string "name"
-    t.string "type"
-    t.integer "user_id", null: false
+    t.integer "type"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_interests_on_user_id"
   end
 
@@ -32,7 +56,10 @@ ActiveRecord::Schema.define(version: 20180125215611) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "interests", "users"
 end
